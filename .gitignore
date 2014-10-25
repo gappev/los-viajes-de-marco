@@ -1,16 +1,16 @@
 # =============== #
 # Unity generated #
 # =============== #
-Temp/
-Obj/
-UnityGenerated/
-Library/
+./Temp/
+./Obj/
+./UnityGenerated/
+./Library/
 
 # ================= #
 # Unity build files #
 # ================= #
-*.exe
-*.apk
+./*.exe
+./*.apk
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
