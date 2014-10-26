@@ -1,16 +1,17 @@
+s
 # =============== #
 # Unity generated #
 # =============== #
-./Temp/
-./Obj/
-./UnityGenerated/
-./Library/
+LosViajesDeMarco/Temp/
+LosViajesDeMarco/Obj/
+LosViajesDeMarco/UnityGenerated/
+LosViajesDeMarco/Library/
 
 # ================= #
 # Unity build files #
 # ================= #
-./*.exe
-./*.apk
+LosViajesDeMarco/*.exe
+LosViajesDeMarco/*.apk
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
