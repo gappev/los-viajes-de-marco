@@ -10,6 +10,7 @@ public class GameConstants : MonoBehaviour {
 		public const string GAME_OVER = "gameOver";
 		public const string GAME_PAUSE = "gamePause";
 		public const string SPEED_UP = "SpeedUp";
+		public const string ANSWER_CLICK = "answerClick";
 	}
 
 	public static class Tags {

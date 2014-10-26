@@ -1,19 +1,52 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Holoville.HOTween;
 
 public class Trivia : MonoBehaviour {
 
+	public AudioClip wrongClip;
+	public AudioClip rightClip;
+
+	void Start() {
+		Messenger.AddListener<bool>(GameConstants.GameEvents.TRIGGER_POLICE, OnTriggerPolice);
+		Messenger.AddListener<int>(GameConstants.GameEvents.ANSWER_CLICK, OnAnswerClick);
+	}
+
+	void OnDestroy() {
+		Messenger.RemoveListener<bool>(GameConstants.GameEvents.TRIGGER_POLICE, OnTriggerPolice);
+		Messenger.RemoveListener<int>(GameConstants.GameEvents.ANSWER_CLICK, OnAnswerClick);
+	}
+
+	void OnTriggerPolice(bool trigger) {
+		if (trigger)
+			Trigger();
+		else
+			Time.timeScale = 1;
+	}
+
+	private int questionIndex;
+
+	void OnTweenComplete() {
+		Time.timeScale = 0;
+	}
+
 	public void Trigger() {
-		int questionIndex = Random.Range(0, questions.Length);
-		string question = questions[questionIndex];
-		//Answer[] questionAnswers = Answer[questionIndex];
+		HOTween.To(transform, 0.5f, new TweenParms().Prop("position",Vector3.zero).Ease(EaseType.EaseOutBounce).OnComplete(OnTweenComplete));
+		questionIndex = Random.Range(0, questions.Length);
+		string question = questions[questionIndex].ToUpper();
+		Answer[] questionAnswers = answers[questionIndex];
 
+		UILabel questionLabel = transform.FindChild("Question").GetComponent<UILabel>();
+		questionLabel.text = question;
 
-		/*var lbl = (GameObject.Instantiate(prefab) as GameObject).GetComponent<UILabel>();
-		lbl.text = answers[index][i].answer;
-		//lbl.transform.parent = panel;
-		lbl.transform.position = new Vector2(lbl.transform.position.x, lbl.transform.position.y - i*0.1f-0.15f);
-*/
+		Debug.Log(question);
+
+		int i = 1;
+		for (; i <= questionAnswers.Length ; i++) {
+			Transform questionChild = transform.Find("Answer" + i);
+			Debug.Log(questionAnswers[i -1].answer);
+			questionChild.GetComponent<UILabel>().text = questionAnswers[i -1].answer.ToUpper();
+		}
 	}
 
 	string[] questions = 
@@ -54,4 +87,18 @@ public class Trivia : MonoBehaviour {
 			new Answer{correct=false, answer="No"}
 		}
 	};
+
+	public void OnAnswerClick(int index) {
+		Debug.Log("Answer clicked: " + index);
+		Answer answer = answers[questionIndex][index];
+		if ( answer.correct) {
+			AudioSource.PlayClipAtPoint(rightClip, transform.position);
+			GameData.instance.addMoney(50.0f);
+		} else {
+			AudioSource.PlayClipAtPoint(wrongClip, transform.position);
+		}
+
+		transform.position = new Vector3(1700, 0);
+		Time.timeScale = 1;
+	}
 }

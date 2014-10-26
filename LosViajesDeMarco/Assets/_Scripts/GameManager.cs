@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
 	private HazardSpawner _hazardSpawner;
 
 
-	private float _currentSpeed = 8.0f;
+	private float _currentSpeed = 20.0f;
 	private float _nextSpawn;
 	private float _traveledDistance = 0;
 
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour {
 			}
 
 			_currentSpeed = Mathf.Clamp(_currentSpeed, 0.0f, maxSpeed);
-			spawnTimeGap = Mathf.Clamp(spawnTimeGap, 1.0f, 3.0f);
+			spawnTimeGap = Mathf.Clamp(spawnTimeGap, 0.2f, 3.0f);
 		}
 	}
 

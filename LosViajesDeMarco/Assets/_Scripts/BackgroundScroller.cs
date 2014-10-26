@@ -4,9 +4,9 @@ using System.Collections;
 public class BackgroundScroller : MonoBehaviour {
 
 	public float scrollingSpeed;
-	public Texture spriteLevel1;
-	public Texture spriteLevel2;
-	public Texture spriteLevel3;
+	public Sprite spriteLevel1;
+	public Sprite spriteLevel2;
+	public Sprite spriteLevel3;
 
 	private GameManager _gameManager;
 
@@ -14,8 +14,9 @@ public class BackgroundScroller : MonoBehaviour {
 		_gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();	
 		int level = GameData.instance.getLevel ();
 
-		foreach(Transform t in transform)
+		for (int i = 0; i < transform.childCount; i++)
 		{
+			Transform t = transform.GetChild(i);
 			SpriteRenderer sr = t.renderer as SpriteRenderer;
 			sr.sprite = level == 1 ? spriteLevel1
 					   :level == 2 ? spriteLevel2
