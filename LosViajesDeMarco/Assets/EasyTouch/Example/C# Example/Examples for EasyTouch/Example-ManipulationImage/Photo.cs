@@ -52,6 +52,8 @@ public class Photo : MonoBehaviour {
 			// Calculate the delta position between touch and photo center position
 			Vector3 position = gesture.GetTouchToWordlPoint(1);
 			deltaPosition = position - transform.position;
+
+
 		}
 	}
 	
