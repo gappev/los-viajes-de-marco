@@ -11,6 +11,7 @@ public class TouchDetection : MonoBehaviour {
 	public Sprite onDown;
 	public Sprite onUp;
 	public int level=-1;
+	public string sceneToLoad;
 
     private int layerMask;
 	// Use this for initialization
@@ -76,8 +77,8 @@ public class TouchDetection : MonoBehaviour {
 	void OnTouch(){
 		SpriteRenderer v = renderer as SpriteRenderer;
 		v.sprite = onDown;
-
 		GameData.instance.setLevel (level);
+		Application.LoadLevel (sceneToLoad);
 	}
 
 	void OnTouchUp()
