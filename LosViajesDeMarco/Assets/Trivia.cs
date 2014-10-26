@@ -1,9 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LoadTrivia : MonoBehaviour {
+public class Trivia : MonoBehaviour {
 
-	public GameObject prefab;
+	public void Trigger() {
+		int questionIndex = Random.Range(0, questions.Length);
+		string question = questions[questionIndex];
+		//Answer[] questionAnswers = Answer[questionIndex];
+
+
+		/*var lbl = (GameObject.Instantiate(prefab) as GameObject).GetComponent<UILabel>();
+		lbl.text = answers[index][i].answer;
+		//lbl.transform.parent = panel;
+		lbl.transform.position = new Vector2(lbl.transform.position.x, lbl.transform.position.y - i*0.1f-0.15f);
+*/
+	}
 
 	string[] questions = 
 	{
@@ -12,14 +23,14 @@ public class LoadTrivia : MonoBehaviour {
 		"Fue de las civilizaciones más\ndominantes de las sociedades\nindígenas de Mesoamérica",
 		"Tenían los mayas libros?"
 	};
-
+	
 	class Answer
 	{
 		public bool correct { get; set;}
 		public string answer {get; set;}
 	}
-
-	// Ewww
+	
+	//Hardcode
 	Answer[][] answers = 
 	{
 		new Answer[]{
@@ -43,32 +54,4 @@ public class LoadTrivia : MonoBehaviour {
 			new Answer{correct=false, answer="No"}
 		}
 	};
-
-	// Use this for initialization
-	void Start () {
-	
-		var index = Random.Range (0,3);
-		while (GameData.instance.isAlreadyAnswered(index)) {
-			index = Random.Range (0,3);
-		}
-		GameData.instance.addTriviaAlreadyAnswered (index);
-
-		var lblQuestion = transform.FindChild ("lblQuestion").GetComponent<UILabel>();
-		
-		lblQuestion.text = questions [index];
-
-		for (int i = 0; i<answers[index].Length; i++) {
-			
-			var panel = transform.FindChild ("AnswersPanel");
-			var lbl = (GameObject.Instantiate(prefab) as GameObject).GetComponent<UILabel>();
-			lbl.text = answers[index][i].answer;
-			lbl.transform.parent = panel;
-			lbl.transform.position = new Vector2(lbl.transform.position.x, lbl.transform.position.y - i*0.1f-0.15f);
-		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
