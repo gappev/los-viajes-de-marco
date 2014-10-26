@@ -6,8 +6,10 @@ using System.Collections;
  * a layer mask to filter the detection, if no mask is supplied 
  * the Default mask will be used
  */
-public abstract class TouchDetection : MonoBehaviour {
+public class TouchDetection : MonoBehaviour {
     public int layerIndex = -1;
+	public Sprite onDown;
+	public 
 
     private int layerMask;
 	// Use this for initialization
@@ -23,7 +25,7 @@ public abstract class TouchDetection : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-    protected void Update()
+    void Update()
     {
         if (Input.touchCount >= 1)
         {
@@ -50,5 +52,8 @@ public abstract class TouchDetection : MonoBehaviour {
         }
     }
 
-    protected abstract void OnTouch();
+	void OnTouch(){
+		SpriteRenderer v = renderer as SpriteRenderer;
+		v.sprite = onDown;
+	}
 }
