@@ -11,10 +11,16 @@ public class HazardSpawner : MonoBehaviour {
 	
 	}
 
+	public void Spawn(int amount) {
+		if (amount < 3) {
+			for (int i = 0; i < amount; i++) {
+				Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+				GameObject hazardPrefab = hazardPrefabs[Random.Range(0, hazardPrefabs.Length)];
+				Instantiate(hazardPrefab, spawnPoint.position, Quaternion.identity);
+			}
+		}
+	}
 	public void Spawn () {
-		Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-		GameObject hazardPrefab = hazardPrefabs[Random.Range(0, hazardPrefabs.Length)];
-
-		Instantiate(hazardPrefab, spawnPoint.position, Quaternion.identity);
+		Spawn (1);
 	}
 }

@@ -6,10 +6,12 @@ public class GameConstants : MonoBehaviour {
 	public static class GameEvents {
 		public const string PLAYER_COLLISION_HAZARD = "playerCollisionHazard";
 		public const string GAME_OVER = "gameOver";
+		public const string SPEED_UP = "SpeedUp";
 	}
 
 	public static class Tags {
 		public const string HAZARD = "Hazard";
+		public const string POLICE_CONE = "Police Cone";
 	}
 
 	public enum GameStates {

@@ -15,7 +15,7 @@ public class BackgroundScroller : MonoBehaviour {
 	void Update () {
 		if (_gameManager.isPlaying()) {
 			Vector3 position = transform.position;
-			float movement = scrollingSpeed * Time.deltaTime;
+			float movement = _gameManager.CurrentSpeed() * Time.deltaTime;
 			position.y = (position.y - movement);
 			position.y = position.y % 25.6f;
 			transform.position = position;

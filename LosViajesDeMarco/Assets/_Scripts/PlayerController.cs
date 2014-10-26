@@ -8,9 +8,12 @@ public class PlayerController : MonoBehaviour {
 	public Transform middleLane;
 	public Transform rightLane;
 
+	private Animator anim;
+
 	private Transform _currentLane;
 
 	void Start() {
+		anim = GetComponent<Animator>();
 		_currentLane = middleLane;
 	}
 
@@ -43,6 +46,8 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == GameConstants.Tags.HAZARD) {
+			//Destroy(other.gameObject);
+			anim.SetBool("Game Over", true);
 			Messenger.Broadcast(GameConstants.GameEvents.PLAYER_COLLISION_HAZARD);
 		}
 	}
