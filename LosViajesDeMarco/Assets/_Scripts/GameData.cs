@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameData : MonoBehaviour 
 {
@@ -7,6 +8,7 @@ public class GameData : MonoBehaviour
 
 	private int level = -1;
 	private float money = 0;
+	private List<int> trivias = new List<int>();
 
 	public static GameData instance
 	{
@@ -62,5 +64,18 @@ public class GameData : MonoBehaviour
 	{
 		money = PlayerPrefs.GetFloat ("Money");
 		return money;
+	}
+
+	public void addTriviaAlreadyAnswered(int index) {
+		trivias.Add (index);
+	}
+
+	public bool isAlreadyAnswered(int index) {
+		for(int i=0; i<trivias.Count; i++) {
+			if (trivias[i] == index) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

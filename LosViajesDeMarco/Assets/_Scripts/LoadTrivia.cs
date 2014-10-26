@@ -49,6 +49,11 @@ public class LoadTrivia : MonoBehaviour {
 		
 		Debug.Log("level was loaded");
 		var index = Random.Range (0,3);
+		while (GameData.instance.isAlreadyAnswered(index)) {
+			index = Random.Range (0,3);
+		}
+		GameData.instance.addTriviaAlreadyAnswered (index);
+
 		var lblQuestion = transform.FindChild ("lblQuestion").GetComponent<UILabel>();
 		
 		lblQuestion.text = questions [index];
