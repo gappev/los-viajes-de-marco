@@ -77,6 +77,8 @@ public class TouchDetection : MonoBehaviour {
 	void OnTouch(){
 		SpriteRenderer v = renderer as SpriteRenderer;
 		v.sprite = onDown;
+		audio.Play ();
+
 		GameData.instance.setLevel (level);
 		Application.LoadLevel (sceneToLoad);
 	}
