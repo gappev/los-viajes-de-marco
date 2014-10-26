@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-	public float laneSwitchSpeed;
 
 	public Transform leftLane;
 	public Transform middleLane;
@@ -15,6 +14,12 @@ public class PlayerController : MonoBehaviour {
 	void Start() {
 		anim = GetComponent<Animator>();
 		_currentLane = middleLane;
+
+		Messenger.AddListener(GameConstants.GameEvents.GAME_OVER, OnGameOver);
+	}
+
+	void OnGameOver() {
+		anim.SetBool("Game Over", true);
 	}
 
 	public void MoveLeft() {
@@ -32,7 +37,6 @@ public class PlayerController : MonoBehaviour {
 
 	public void MoveRight() {
 		if (_currentLane != rightLane) {
-			transform.Translate(Vector2.right * laneSwitchSpeed * Time.deltaTime);
 
 			if (_currentLane == leftLane) {
 				_currentLane = middleLane;
@@ -47,8 +51,8 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == GameConstants.Tags.HAZARD) {
 			//Destroy(other.gameObject);
-			anim.SetBool("Game Over", true);
 			Messenger.Broadcast(GameConstants.GameEvents.PLAYER_COLLISION_HAZARD);
 		}
 	}
+
 }
