@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
 
 	private Transform _currentLane;
 
+	private bool _isInvinsible = false; 
+
 	void Start() {
 		anim = GetComponent<Animator>();
 		_currentLane = middleLane;
@@ -65,15 +67,26 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
+		if (_isInvinsible) return;
+
+
+
 		if (other.tag == GameConstants.Tags.HAZARD) {
 			//Destroy(other.gameObject);
-			
 			AudioSource.PlayClipAtPoint(potHoleSound, transform.position, 0.4f);
 			audio.Play();
 			Messenger.Broadcast(GameConstants.GameEvents.PLAYER_COLLISION_HAZARD);
 		} else if (other.tag == GameConstants.Tags.POLICE_CONE) {
 			Messenger.Broadcast<bool>(GameConstants.GameEvents.TRIGGER_POLICE, true);
 		}
+		_isInvinsible = true;
+		StartCoroutine(setInvinsible());
+	}
+
+	IEnumerator setInvinsible() {
+		yield return new WaitForSeconds(1.0f);
+
+		_isInvinsible = false;
 	}
 
 }

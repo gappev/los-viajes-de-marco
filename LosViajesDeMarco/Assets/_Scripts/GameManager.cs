@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 	private GameConstants.GameStates _state = GameConstants.GameStates.Playing;
 	private HazardSpawner _hazardSpawner;
 
+	private int coins = 0;
 
 	private float _currentSpeed = 20.0f;
 	private float _nextSpawn;
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour {
 
 		if (playerLives == 0) {
 			_state = GameConstants.GameStates.GameOver;
+			GameData.instance.addMoney(coins);
 			Messenger.Broadcast(GameConstants.GameEvents.GAME_OVER);
 		}
 	}

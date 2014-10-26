@@ -11,6 +11,7 @@ public class GameConstants : MonoBehaviour {
 		public const string GAME_PAUSE = "gamePause";
 		public const string SPEED_UP = "SpeedUp";
 		public const string ANSWER_CLICK = "answerClick";
+		public const string ITEM_PICK = "itemPick";
 	}
 
 	public static class Tags {

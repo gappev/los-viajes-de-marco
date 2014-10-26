@@ -7,7 +7,7 @@ public class LoadTrivia : MonoBehaviour {
 
 	string[] questions = 
 	{
-		"Fue el jade más cotizado que el\noro para el desarrollo del arte maya?",
+		"Fue el jade más cotizado que el\noro para el desarrollodel arte maya?",
 		"No es uno de los primeros dioses\ncreadores de la civilización mayas",
 		"Fue de las civilizaciones más\ndominantes de las sociedades\nindígenas de Mesoamérica",
 		"Tenían los mayas libros?"
