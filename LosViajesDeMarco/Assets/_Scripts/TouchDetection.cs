@@ -9,7 +9,7 @@ using System.Collections;
 public class TouchDetection : MonoBehaviour {
     public int layerIndex = -1;
 	public Sprite onDown;
-	public 
+	public int level=-1;
 
     private int layerMask;
 	// Use this for initialization
@@ -55,5 +55,7 @@ public class TouchDetection : MonoBehaviour {
 	void OnTouch(){
 		SpriteRenderer v = renderer as SpriteRenderer;
 		v.sprite = onDown;
+
+		GameData.instance.setLevel (level);
 	}
 }
