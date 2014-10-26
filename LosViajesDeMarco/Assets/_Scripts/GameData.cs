@@ -46,6 +46,11 @@ public class GameData : MonoBehaviour
 		this.level = level;
 	}
 
+	public int getLevel ()
+	{
+		return this.level;
+	}
+
 	public void addMoney (float money)
 	{
 		this.money += money;
