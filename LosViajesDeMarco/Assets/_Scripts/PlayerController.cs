@@ -16,8 +16,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void MoveLeft() {
 		if (_currentLane != leftLane) {
-			//transform.Translate(-Vector2.right * laneSwitchSpeed * Time.deltaTime);
-		
+
 			if (_currentLane == rightLane) {
 				_currentLane = middleLane;
 			} else if (_currentLane == middleLane) {
@@ -39,6 +38,12 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			transform.position = _currentLane.position;
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.tag == GameConstants.Tags.HAZARD) {
+			Messenger.Broadcast(GameConstants.GameEvents.PLAYER_COLLISION_HAZARD);
 		}
 	}
 }

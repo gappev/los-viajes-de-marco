@@ -2,10 +2,12 @@ using UnityEngine;
 using System.Collections;
 
 public class Photo : MonoBehaviour {
-	
+
 	private Vector3 deltaPosition;
 	private Vector3 rotation;
 	private bool newPivot=false;
+
+	public SpriteRenderer imageRenderer;
 	
 		// Subscribe to events
 	void OnEnable(){
@@ -52,8 +54,6 @@ public class Photo : MonoBehaviour {
 			// Calculate the delta position between touch and photo center position
 			Vector3 position = gesture.GetTouchToWordlPoint(1);
 			deltaPosition = position - transform.position;
-
-
 		}
 	}
 	
@@ -67,6 +67,26 @@ public class Photo : MonoBehaviour {
 			}
 				
 			transform.position = position - deltaPosition;
+
+			float cameraSizeY = Camera.main.orthographicSize * 2;
+			float cameraSizeX = Camera.main.orthographicSize * Camera.main.aspect * 2;
+
+			//Debug.Log(cameraSizeX);
+
+			float imageSizeX = /*58.20f;*/imageRenderer.bounds.size.x;
+			float imageSizeY = /*38.28f;*/imageRenderer.bounds.size.y;
+
+
+			float maxX = (imageSizeX - cameraSizeX) / 2.0f;
+			Debug.Log(maxX);
+
+			float maxY = (imageSizeY - cameraSizeY) / 2.0f;
+		
+			float posX = Mathf.Clamp(transform.position.x, -maxX, maxX); 
+			float posY = Mathf.Clamp(transform.position.y, -maxY, maxY);
+			//float posY = transform.position.y;
+			transform.position = new Vector3(posX, posY, 0.0f);
+
 		}
 
 	}
