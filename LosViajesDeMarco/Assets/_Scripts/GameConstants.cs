@@ -4,6 +4,7 @@ using System.Collections;
 public class GameConstants : MonoBehaviour {
 
 	public static class GameEvents {
+		public const string PLAYER_Out_Of_Road = "playerOutOfRoad";
 		public const string PLAYER_COLLISION_HAZARD = "playerCollisionHazard";
 		public const string TRIGGER_POLICE = "triggerPolice";
 		public const string GAME_OVER = "gameOver";

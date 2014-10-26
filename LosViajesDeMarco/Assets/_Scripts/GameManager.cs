@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
 		_hazardSpawner = GameObject.Find("Hazard Spawner").GetComponent<HazardSpawner>();
 		_nextSpawn = Time.timeSinceLevelLoad;
 		Messenger.AddListener(GameConstants.GameEvents.PLAYER_COLLISION_HAZARD, OnPlayerHazardCollision);
+		Messenger.AddListener(GameConstants.GameEvents.PLAYER_Out_Of_Road, OnPlayerOutOfRoad);
 	}
 
 	void OnDestroy() {
@@ -78,6 +79,11 @@ public class GameManager : MonoBehaviour {
 			_state = GameConstants.GameStates.GameOver;
 			Messenger.Broadcast(GameConstants.GameEvents.GAME_OVER);
 		}
+	}
+
+	private void OnPlayerOutOfRoad(){
+		_state = GameConstants.GameStates.GameOver;
+		Messenger.Broadcast(GameConstants.GameEvents.GAME_OVER);
 	}
 
 	public bool isPlaying() {

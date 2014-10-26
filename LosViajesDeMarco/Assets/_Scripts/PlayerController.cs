@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
 	public Transform leftLane;
 	public Transform middleLane;
 	public Transform rightLane;
+	public Transform rightDeadLane;
+	public Transform leftDeadLane;
 
 	private Animator anim;
 
@@ -35,6 +37,12 @@ public class PlayerController : MonoBehaviour {
 
 			transform.position = _currentLane.position;
 		}
+		else{
+			audio.Play();
+			_currentLane = leftDeadLane;
+			transform.position = _currentLane.position;
+			Messenger.Broadcast(GameConstants.GameEvents.PLAYER_Out_Of_Road);
+		}
 	}
 
 	public void MoveRight() {
@@ -47,6 +55,12 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			transform.position = _currentLane.position;
+		}
+		else{
+			audio.Play();
+			_currentLane = rightDeadLane;
+			transform.position = _currentLane.position;
+			Messenger.Broadcast(GameConstants.GameEvents.PLAYER_Out_Of_Road);
 		}
 	}
 
