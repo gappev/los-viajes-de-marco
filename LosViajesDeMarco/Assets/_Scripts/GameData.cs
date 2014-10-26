@@ -6,6 +6,7 @@ public class GameData : MonoBehaviour
 	private static GameData _instance;
 
 	private int level = -1;
+	private float money = 0;
 
 	public static GameData instance
 	{
@@ -43,5 +44,18 @@ public class GameData : MonoBehaviour
 	public void setLevel(int level)
 	{
 		this.level = level;
+	}
+
+	public void addMoney (float money)
+	{
+		this.money += money;
+		PlayerPrefs.SetFloat ("Money", this.money);
+		PlayerPrefs.Save ();
+	} 
+
+	public float getMoney()
+	{
+		money = PlayerPrefs.GetFloat ("Money");
+		return money;
 	}
 }
