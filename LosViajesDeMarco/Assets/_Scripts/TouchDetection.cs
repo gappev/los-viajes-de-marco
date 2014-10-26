@@ -9,6 +9,7 @@ using System.Collections;
 public class TouchDetection : MonoBehaviour {
     public int layerIndex = -1;
 	public Sprite onDown;
+	public Sprite onUp;
 	public int level=-1;
 
     private int layerMask;
@@ -50,12 +51,30 @@ public class TouchDetection : MonoBehaviour {
                 OnTouch();
             }
         }
-    }
-
+		else if (Input.GetMouseButtonUp(0))
+		{
+			Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			Vector2 touchPos = new Vector2(worldPoint.x, worldPoint.y);
+			if (transform.collider2D == Physics2D.OverlapPoint(touchPos, layerMask))
+			{
+				OnTouchUp();
+			}
+		}
+		
+	}
+	
 	void OnTouch(){
 		SpriteRenderer v = renderer as SpriteRenderer;
 		v.sprite = onDown;
 
 		GameData.instance.setLevel (level);
 	}
+
+	void OnTouchUp()
+	{
+		SpriteRenderer v = renderer as SpriteRenderer;
+		v.sprite = onUp;
+
+	}
+
 }
