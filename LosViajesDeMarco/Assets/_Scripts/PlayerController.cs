@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-	public float laneSwitchSpeed;
+	public AudioClip ouchSound;
+	public AudioClip potHoleSound;
 
 	public Transform leftLane;
 	public Transform middleLane;
@@ -15,6 +16,12 @@ public class PlayerController : MonoBehaviour {
 	void Start() {
 		anim = GetComponent<Animator>();
 		_currentLane = middleLane;
+
+		Messenger.AddListener(GameConstants.GameEvents.GAME_OVER, OnGameOver);
+	}
+
+	void OnGameOver() {
+		anim.SetBool("Game Over", true);
 	}
 
 	public void MoveLeft() {
@@ -32,7 +39,6 @@ public class PlayerController : MonoBehaviour {
 
 	public void MoveRight() {
 		if (_currentLane != rightLane) {
-			transform.Translate(Vector2.right * laneSwitchSpeed * Time.deltaTime);
 
 			if (_currentLane == leftLane) {
 				_currentLane = middleLane;
@@ -47,8 +53,13 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == GameConstants.Tags.HAZARD) {
 			//Destroy(other.gameObject);
-			anim.SetBool("Game Over", true);
+			
+			AudioSource.PlayClipAtPoint(potHoleSound, transform.position, 0.4f);
+			audio.Play();
 			Messenger.Broadcast(GameConstants.GameEvents.PLAYER_COLLISION_HAZARD);
+		} else if (other.tag == GameConstants.Tags.POLICE_CONE) {
+			Messenger.Broadcast<bool>(GameConstants.GameEvents.TRIGGER_POLICE, true);
 		}
 	}
+
 }

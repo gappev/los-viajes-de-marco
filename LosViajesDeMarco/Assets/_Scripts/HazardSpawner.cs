@@ -6,6 +6,8 @@ public class HazardSpawner : MonoBehaviour {
 
 	public GameObject[] hazardPrefabs;
 
+	public GameObject conePrefab;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -20,6 +22,14 @@ public class HazardSpawner : MonoBehaviour {
 			}
 		}
 	}
+
+	public void SpawnPoliceCones() {
+		for (int i = 0; i < 2; i++) {
+			Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+			Instantiate(conePrefab, spawnPoint.position, Quaternion.identity);
+		}
+	}
+
 	public void Spawn () {
 		Spawn (1);
 	}

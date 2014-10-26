@@ -38,7 +38,12 @@ public class GameManager : MonoBehaviour {
 			int amount = Time.timeSinceLevelLoad < 30.0f ? 1 : 2;
 
 			if (Time.timeSinceLevelLoad >= _nextSpawn) {
-				_hazardSpawner.Spawn(amount);
+				bool spawnCones = Random.Range(0, 100) <= 12;
+
+				if (spawnCones) 
+					_hazardSpawner.SpawnPoliceCones();
+				else
+					_hazardSpawner.Spawn(amount);
 				_nextSpawn = Time.timeSinceLevelLoad + spawnTimeGap;
 			}
 
@@ -71,7 +76,7 @@ public class GameManager : MonoBehaviour {
 
 		if (playerLives == 0) {
 			_state = GameConstants.GameStates.GameOver;
-			//Messenger.Broadcast(GameConstants.GameEvents.GAME_OVER);
+			Messenger.Broadcast(GameConstants.GameEvents.GAME_OVER);
 		}
 	}
 
