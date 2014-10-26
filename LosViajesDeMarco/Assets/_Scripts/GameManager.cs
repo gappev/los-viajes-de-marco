@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour {
 
 		if (playerLives == 0) {
 			_state = GameConstants.GameStates.GameOver;
-			//Messenger.Broadcast(GameConstants.GameEvents.GAME_OVER);
+			Messenger.Broadcast(GameConstants.GameEvents.GAME_OVER);
 		}
 	}
 

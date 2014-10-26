@@ -6,6 +6,7 @@ public class GameConstants : MonoBehaviour {
 	public static class GameEvents {
 		public const string PLAYER_COLLISION_HAZARD = "playerCollisionHazard";
 		public const string GAME_OVER = "gameOver";
+		public const string GAME_PAUSE = "gamePause";
 		public const string SPEED_UP = "SpeedUp";
 	}
 
