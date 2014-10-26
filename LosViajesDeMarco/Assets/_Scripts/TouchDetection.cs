@@ -41,10 +41,20 @@ public class TouchDetection : MonoBehaviour {
                     OnTouch();
                 }
             }
-        }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			else if(touch.phase == TouchPhase.Ended )
+			{
+				Vector3 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+				Vector2 touchPos = new Vector2(worldPoint.x, worldPoint.y);
+				
+				if (transform.collider2D == Physics2D.OverlapPoint(touchPos, layerMask))
+				{
+					OnTouchUp();
+				}
+			}
+		}
+		else if (Input.GetMouseButtonDown(0))
+		{
+			Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 touchPos = new Vector2(worldPoint.x, worldPoint.y);
             if (transform.collider2D == Physics2D.OverlapPoint(touchPos, layerMask))
             {
