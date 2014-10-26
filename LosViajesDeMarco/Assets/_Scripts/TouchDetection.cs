@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Holoville.HOTween;
 
 /*
  *This class will detect the touch on a gameObject, you can supply 
@@ -12,6 +13,7 @@ public class TouchDetection : MonoBehaviour {
 	public Sprite onUp;
 	public int level=-1;
 	public string sceneToLoad;
+	public Transform guatemala;
 
     private int layerMask;
 	// Use this for initialization
@@ -79,8 +81,14 @@ public class TouchDetection : MonoBehaviour {
 		v.sprite = onDown;
 		audio.Play ();
 
-		GameData.instance.setLevel (level);
-		Application.LoadLevel (sceneToLoad);
+		if(level == 4){
+			HOTween.To(guatemala, 1f, new TweenParms().Prop("position", Vector3.zero).Ease(EaseType.EaseInBounce));
+		}
+		else{
+			GameData.instance.setLevel (level);
+			Application.LoadLevel (sceneToLoad);
+		}
+
 	}
 
 	void OnTouchUp()

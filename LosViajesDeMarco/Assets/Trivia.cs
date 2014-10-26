@@ -19,7 +19,7 @@ public class Trivia : MonoBehaviour {
 
 	void OnTriggerPolice(bool trigger) {
 		if (trigger)
-			Trigger();
+			Invoke("Trigger", 1.0f);
 		else
 			Time.timeScale = 1;
 	}
